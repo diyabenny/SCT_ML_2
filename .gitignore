@@ -52,7 +52,7 @@ venv.bak/
 # =============================================================================
 
 # Output files (ignore everything in output folder)
-output/
+# output/
 
 # Data files (ignore everything in data folder)
 data/
