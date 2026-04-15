@@ -1,0 +1,157 @@
+# =============================================================================
+# Python
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib64/
+__pycache__/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.virtualenv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.suo
+*.user
+*.sln
+*.dbmdl
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+*.ipynb_checkpoints
+
+# =============================================================================
+# Project Specific - Ignore all files in these folders
+# =============================================================================
+
+# Output files (ignore everything in output folder)
+output/
+
+# Data files (ignore everything in data folder)
+data/
+
+# Model files
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.pth
+*.pt
+
+# =============================================================================
+# Logs and temporary files
+# =============================================================================
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.cache
+*.pyc
+*.pyo
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.dll
+*.exe
+
+# =============================================================================
+# Environment and secrets
+# =============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Secrets and keys
+*.key
+*.pem
+*.crt
+secrets/
+config.json
+credentials.json
+
+# =============================================================================
+# Testing and coverage
+# =============================================================================
+
+# Coverage reports
+.coverage
+.coverage.*
+.htmlcov/
+.xmlcov/
+.tox/
+.hypothesis/
+.pytest_cache/
+cover/
+
+# =============================================================================
+# Documentation
+# =============================================================================
+
+# Documentation builds
+docs/_build/
+site/
+*.aux
+*.out
+*.toc
+
+# =============================================================================
+# OS specific
+# =============================================================================
+
+# Windows
+*.dll
+*.exe
+*.msi
+*.sys
+
+# Linux
+*.so
+*.o
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
