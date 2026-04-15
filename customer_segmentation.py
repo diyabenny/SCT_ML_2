@@ -24,9 +24,9 @@ np.random.seed(42)
 # =============================================================================
 try:
     df = pd.read_csv("data/Mall_Customers.csv")
-    print("✅ Dataset loaded successfully")
+    print("Dataset loaded successfully")
 except FileNotFoundError:
-    print("❌ Dataset not found. Check path: data/Mall_Customers.csv")
+    print("Dataset not found. Check path: data/Mall_Customers.csv")
     exit()
 
 print("=" * 60)
@@ -44,7 +44,7 @@ X = df[['Annual Income (k$)', 'Spending Score (1-100)']].copy()
 # Simple value score (useful for business insights)
 df['Customer_Value_Score'] = (df['Annual Income (k$)'] * df['Spending Score (1-100)']) / 100
 
-print(f"\n✅ Features selected: {list(X.columns)}")
+print(f"\nFeatures selected: {list(X.columns)}")
 print("   Reason: Original features only - no redundancy, better interpretability")
 
 # =============================================================================
@@ -83,7 +83,7 @@ else:
     scaler = scaler_standard
     scaler_name = "StandardScaler"
 
-print(f"\n✅ Selected Scaler: {scaler_name}")
+print(f"\nSelected Scaler: {scaler_name}")
 print(f"   Best Silhouette with {scaler_name}: {max(best_sil_standard, best_sil_minmax):.4f}")
 
 # =============================================================================
@@ -104,10 +104,10 @@ for k in K_range:
 # Find optimal k using highest silhouette score with support from DB index
 K_OPTIMAL = K_range.start + int(np.argmax(sil_scores))
 
-print(f"\n📊 Optimal K Analysis:")
+print(f"\nOptimal K Analysis:")
 print(f"   • Best Silhouette Score  : k = {K_OPTIMAL} (score: {max(sil_scores):.4f})")
 print(f"   • Best Davies-Bouldin    : k = {K_range.start + int(np.argmin(db_scores))} (score: {min(db_scores):.4f})")
-print(f"\n✅ Selected k = {K_OPTIMAL}")
+print(f"\nSelected k = {K_OPTIMAL}")
 print("   Reason: Selected based on highest silhouette score with support from DB index")
 
 # =============================================================================
@@ -118,7 +118,7 @@ df['Cluster'] = kmeans.fit_predict(X_scaled)
 
 # Display cluster centers in original scale (IMPRESSIVE FOR INTERVIEWS)
 cluster_centers_original = scaler.inverse_transform(kmeans.cluster_centers_)
-print("\n📊 Cluster Centers (Original Scale):")
+print("\nCluster Centers (Original Scale):")
 for i, center in enumerate(cluster_centers_original):
     print(f"   Cluster {i}: Income = ${center[0]:.1f}k, Spending Score = {center[1]:.1f}")
 
@@ -169,7 +169,7 @@ print("─" * 80)
 summary_export = summary[['Segment', 'Count', 'Avg_Income', 'Avg_Spending', 'Avg_Value_Score']].copy()
 summary_export.columns = ['Segment', 'Count', 'Avg_Income_k$', 'Avg_Spending_Score', 'Avg_Value_Score']
 summary_export.to_csv('output/cluster_summary_final.csv', index=False)
-print("\n✅ Summary saved -> output/cluster_summary_final.csv")
+print("\nSummary saved -> output/cluster_summary_final.csv")
 
 # =============================================================================
 # 7. VISUALISATION
@@ -239,7 +239,7 @@ plt.setp(ax4.get_xticklabels(), rotation=15, ha='right', color='white')
 
 plt.tight_layout()
 plt.savefig('output/customer_segmentation_final.png', dpi=150, bbox_inches='tight', facecolor=BG)
-print("✅ Plot saved -> output/customer_segmentation_final.png")
+print("Plot saved -> output/customer_segmentation_final.png")
 plt.close()
 
 # =============================================================================
@@ -290,7 +290,7 @@ ax_pca.text(0.02, 0.98, variance_text, transform=ax_pca.transAxes,
 plt.tight_layout()
 plt.savefig('output/pca_cluster_visualization_final.png', dpi=150, bbox_inches='tight', facecolor=BG)
 plt.close()
-print("✅ PCA visualization saved -> output/pca_cluster_visualization_final.png")
+print("PCA visualization saved -> output/pca_cluster_visualization_final.png")
 
 # =============================================================================
 # 9. PERFORMANCE EVALUATION
@@ -303,28 +303,28 @@ silhouette_avg = silhouette_score(X_scaled, df['Cluster'])
 db_score = davies_bouldin_score(X_scaled, df['Cluster'])
 ch_score = calinski_harabasz_score(X_scaled, df['Cluster'])
 
-print(f"\n📊 INTERNAL VALIDATION METRICS:")
+print(f"\nINTERNAL VALIDATION METRICS:")
 print(f"   • Silhouette Score        : {silhouette_avg:.4f}")
 print(f"   • Davies-Bouldin Index    : {db_score:.4f}")
 print(f"   • Calinski-Harabasz Index : {ch_score:.2f}")
 
 # Quality assessment
-print(f"\n📈 QUALITY ASSESSMENT:")
+print(f"\nQUALITY ASSESSMENT:")
 if silhouette_avg > 0.5:
-    print("   ✅ Silhouette Score: GOOD (>0.5)")
+    print("Silhouette Score: GOOD (>0.5)")
 elif silhouette_avg > 0.4:
-    print("   ⚠️ Silhouette Score: ACCEPTABLE (0.4-0.5)")
+    print("Silhouette Score: ACCEPTABLE (0.4-0.5)")
 else:
-    print("   ❌ Silhouette Score: NEEDS IMPROVEMENT (<0.4)")
+    print("Silhouette Score: NEEDS IMPROVEMENT (<0.4)")
 
 if db_score < 0.7:
-    print("   ✅ Davies-Bouldin: GOOD (<0.7)")
+    print("Davies-Bouldin: GOOD (<0.7)")
 elif db_score < 0.9:
-    print("   ⚠️ Davies-Bouldin: ACCEPTABLE (0.7-0.9)")
+    print("Davies-Bouldin: ACCEPTABLE (0.7-0.9)")
 else:
-    print("   ❌ Davies-Bouldin: NEEDS IMPROVEMENT (>0.9)")
+    print("Davies-Bouldin: NEEDS IMPROVEMENT (>0.9)")
 
-print(f"\n📊 PCA EXPLAINED VARIANCE:")
+print(f"\nPCA EXPLAINED VARIANCE:")
 print(f"   • Total variance explained by 2 components: {pca.explained_variance_ratio_.sum():.2%}")
 
 # =============================================================================
@@ -337,7 +337,7 @@ print("=" * 60)
 # Get segment counts
 segment_counts = summary[['Segment', 'Count']].values
 
-print("\n🎯 TARGETED MARKETING STRATEGIES:\n")
+print("\nTARGETED MARKETING STRATEGIES:\n")
 for segment, count in segment_counts:
     if "Premium" in segment:
         print(f"   • {segment} ({count} customers)")
@@ -356,7 +356,7 @@ for segment, count in segment_counts:
         print(f"     → Strategy: General marketing, standard loyalty program, personalized recos\n")
 
 print("─" * 60)
-print("💡 KEY TAKEAWAYS:")
+print("KEY TAKEAWAYS:")
 print("   • 39 Premium Spenders = highest revenue potential")
 print("   • 35 Conservative Shoppers = untapped opportunity")
 print("   • 22 Aspirational Shoppers = brand loyalty potential")
@@ -366,10 +366,10 @@ print("   • 81 Average Customers = largest segment for growth")
 # 11. EXPORT FINAL DATA
 # =============================================================================
 df.to_csv('output/customer_segments_final.csv', index=False)
-print("\n✅ Final data saved -> output/customer_segments_final.csv")
+print("\nFinal data saved -> output/customer_segments_final.csv")
 
 print("\n" + "=" * 60)
-print("✅ PROJECT COMPLETE!")
+print("PROJECT COMPLETE!")
 print("   • Reproducible (random_state=42, seed=42)")
 print("   • Production-ready code")
 print("   • Business insights included")
